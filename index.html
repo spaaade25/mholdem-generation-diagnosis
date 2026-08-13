@@ -1,0 +1,159 @@
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="theme-color" content="#111111">
+
+  <title>エムホールデム世代診断</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Noto Sans JP",
+        "Hiragino Kaku Gothic ProN",
+        "Yu Gothic",
+        sans-serif;
+
+      background: #f5f5f5;
+      color: #222;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 32px 22px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .icon {
+      font-size: 52px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 26px;
+      line-height: 1.4;
+      margin: 0 0 18px;
+      font-weight: 800;
+    }
+
+    .description {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #555;
+      margin: 0;
+    }
+
+    .start-button {
+      display: block;
+      width: 100%;
+      min-height: 56px;
+      margin-top: 28px;
+
+      border: none;
+      border-radius: 14px;
+
+      background: #111;
+      color: white;
+
+      font-size: 18px;
+      font-weight: 700;
+
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .start-button:active {
+      transform: scale(0.98);
+    }
+
+    .notice {
+      margin-top: 18px;
+      font-size: 12px;
+      color: #888;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding-top: 60px;
+        padding-bottom: 60px;
+      }
+
+      .card {
+        padding: 45px 40px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+
+    <section class="card">
+
+      <div class="icon">🃏</div>
+
+      <h1>
+        あなたは<br>
+        エムホールデム何世代？
+      </h1>
+
+      <p class="description">
+        いくつかの質問に答えて、<br>
+        あなたのエムホールデム世代を診断しよう！
+      </p>
+
+      <button class="start-button" onclick="startDiagnosis()">
+        診断スタート
+      </button>
+
+      <p class="notice">
+        所要時間：約1分
+      </p>
+
+    </section>
+
+  </main>
+
+  <script>
+    function startDiagnosis() {
+      alert("診断を開始します！");
+    }
+  </script>
+
+</body>
+</html>
+```
