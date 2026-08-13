@@ -1,9 +1,8 @@
-```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#111111">
 
   <title>エムホールデム世代診断</title>
@@ -13,22 +12,11 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      min-height: 100%;
-    }
-
     body {
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Noto Sans JP",
-        "Hiragino Kaku Gothic ProN",
-        "Yu Gothic",
-        sans-serif;
-
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans JP",
+                   "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
       background: #f5f5f5;
       color: #222;
     }
@@ -38,82 +26,56 @@
       max-width: 480px;
       min-height: 100vh;
       margin: 0 auto;
-      padding: 24px 20px 40px;
-
+      padding: 24px 20px;
       display: flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: center;
     }
 
     .card {
+      width: 100%;
       background: white;
       border-radius: 20px;
-      padding: 32px 22px;
+      padding: 30px 22px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .progress {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 20px;
       text-align: center;
     }
 
-    .icon {
-      font-size: 52px;
-      margin-bottom: 12px;
-    }
-
-    h1 {
-      font-size: 26px;
-      line-height: 1.4;
-      margin: 0 0 18px;
+    .question {
+      font-size: 22px;
+      line-height: 1.5;
       font-weight: 800;
+      text-align: center;
+      margin-bottom: 25px;
     }
 
-    .description {
-      font-size: 15px;
-      line-height: 1.8;
-      color: #555;
-      margin: 0;
-    }
-
-    .start-button {
+    .answer {
       display: block;
       width: 100%;
       min-height: 56px;
-      margin-top: 28px;
-
-      border: none;
+      margin: 12px 0;
+      padding: 12px 16px;
+      border: 2px solid #ddd;
       border-radius: 14px;
-
-      background: #111;
-      color: white;
-
-      font-size: 18px;
-      font-weight: 700;
-
+      background: white;
+      color: #222;
+      font-size: 16px;
+      text-align: left;
       cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
     }
 
-    .start-button:active {
+    .answer:active {
       transform: scale(0.98);
     }
 
-    .notice {
-      margin-top: 18px;
-      font-size: 12px;
-      color: #888;
-    }
-
-    @media (min-width: 768px) {
-      .container {
-        padding-top: 60px;
-        padding-bottom: 60px;
-      }
-
-      .card {
-        padding: 45px 40px;
-      }
-
-      h1 {
-        font-size: 32px;
-      }
+    .answer:hover {
+      border-color: #111;
     }
   </style>
 </head>
@@ -124,36 +86,39 @@
 
     <section class="card">
 
-      <div class="icon">🃏</div>
+      <div class="progress">
+        Q1 / 10
+      </div>
 
-      <h1>
-        あなたは<br>
-        エムホールデム何世代？
-      </h1>
+      <div class="question">
+        エムホールデムを始めたのはいつ？
+      </div>
 
-      <p class="description">
-        いくつかの質問に答えて、<br>
-        あなたのエムホールデム世代を診断しよう！
-      </p>
-
-      <button class="start-button" onclick="startDiagnosis()">
-        診断スタート
+      <button class="answer" onclick="answer(10)">
+        A：サービス開始直後から
       </button>
 
-      <p class="notice">
-        所要時間：約1分
-      </p>
+      <button class="answer" onclick="answer(7)">
+        B：かなり初期から
+      </button>
+
+      <button class="answer" onclick="answer(4)">
+        C：途中から始めた
+      </button>
+
+      <button class="answer" onclick="answer(1)">
+        D：最近始めた
+      </button>
 
     </section>
 
   </main>
 
   <script>
-    function startDiagnosis() {
-      alert("診断を開始します！");
+    function answer(score) {
+      alert("回答を受け付けました！\n今回のスコア：" + score);
     }
   </script>
 
 </body>
 </html>
-```
