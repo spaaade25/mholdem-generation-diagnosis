@@ -1,124 +1,1116 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#111111">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111111">
 
-  <title>エムホールデム世代診断</title>
+<title>m HOLD'EM 世代診断</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans JP",
-                   "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-      background: #f5f5f5;
-      color: #222;
-    }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Noto Sans JP",
+    "Hiragino Kaku Gothic ProN",
+    "Yu Gothic",
+    sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
 
-    .container {
-      width: 100%;
-      max-width: 480px;
-      min-height: 100vh;
-      margin: 0 auto;
-      padding: 24px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+.container {
+  width: 100%;
+  max-width: 520px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 24px 18px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    .card {
-      width: 100%;
-      background: white;
-      border-radius: 20px;
-      padding: 30px 22px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    }
+.card {
+  width: 100%;
+  background: #fff;
+  border-radius: 22px;
+  padding: 28px 22px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+}
 
-    .progress {
-      font-size: 13px;
-      color: #888;
-      margin-bottom: 20px;
-      text-align: center;
-    }
+.hidden {
+  display: none !important;
+}
 
-    .question {
-      font-size: 22px;
-      line-height: 1.5;
-      font-weight: 800;
-      text-align: center;
-      margin-bottom: 25px;
-    }
+.title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
 
-    .answer {
-      display: block;
-      width: 100%;
-      min-height: 56px;
-      margin: 12px 0;
-      padding: 12px 16px;
-      border: 2px solid #ddd;
-      border-radius: 14px;
-      background: white;
-      color: #222;
-      font-size: 16px;
-      text-align: left;
-      cursor: pointer;
-    }
+.subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
 
-    .answer:active {
-      transform: scale(0.98);
-    }
+.description {
+  background: #f7f7f7;
+  border-radius: 14px;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 22px;
+}
 
-    .answer:hover {
-      border-color: #111;
-    }
-  </style>
+.description strong {
+  color: #111;
+}
+
+.start-button,
+.reset-button,
+.x-button {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.start-button {
+  background: #111;
+  color: #fff;
+}
+
+.reset-button {
+  background: #eee;
+  color: #222;
+  margin-top: 10px;
+}
+
+.x-button {
+  background: #111;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.progress {
+  font-size: 13px;
+  color: #888;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 7px;
+  background: #eee;
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.progress-inner {
+  height: 100%;
+  background: #111;
+  width: 0%;
+  transition: width .25s ease;
+}
+
+.question {
+  font-size: 21px;
+  line-height: 1.55;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.note {
+  font-size: 12px;
+  color: #777;
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+.answer {
+  display: block;
+  width: 100%;
+  min-height: 58px;
+  margin: 11px 0;
+  padding: 12px 15px;
+  border: 2px solid #ddd;
+  border-radius: 14px;
+  background: #fff;
+  color: #222;
+  font-size: 15px;
+  line-height: 1.5;
+  text-align: left;
+  cursor: pointer;
+  transition: .15s;
+}
+
+.answer:hover {
+  border-color: #111;
+  background: #fafafa;
+}
+
+.answer:active {
+  transform: scale(.98);
+}
+
+.result-label {
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 8px;
+}
+
+.result-title {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 900;
+  margin-bottom: 14px;
+}
+
+.result-description {
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 22px;
+}
+
+.result-score {
+  background: #f7f7f7;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.score-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-size: 14px;
+}
+
+.score-row strong {
+  font-weight: 800;
+}
+
+.share-text {
+  font-size: 12px;
+  color: #777;
+  text-align: center;
+  line-height: 1.6;
+  margin-top: 14px;
+}
+
+.version {
+  position: fixed;
+  left: 8px;
+  bottom: 6px;
+  font-size: 10px;
+  color: #aaa;
+  z-index: 100;
+}
+
+@media (max-width: 420px) {
+  .container {
+    padding: 16px 12px 45px;
+  }
+
+  .card {
+    padding: 24px 17px;
+  }
+
+  .title {
+    font-size: 27px;
+  }
+
+  .question {
+    font-size: 19px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <main class="container">
+<div class="container">
 
-    <section class="card">
+  <!-- START -->
+  <section id="startScreen" class="card">
 
-      <div class="progress">
-        Q1 / 10
-      </div>
+    <div class="title">
+      m HOLD'EM<br>世代診断
+    </div>
 
-      <div class="question">
-        エムホールデムを始めたのはいつ？
-      </div>
+    <div class="subtitle">
+      あなたは何世代？
+    </div>
 
-      <button class="answer" onclick="answer(10)">
-        A：サービス開始直後から
-      </button>
+    <div class="description">
+      この診断では、単純に<strong>「いつm HOLD'EMを始めたか」だけ</strong>ではなく、
+      当時の<strong>イベントへの参加・ゲーム内仕様の体験・コミュニティでの経験</strong>を重視して、
+      あなたの「m HOLD'EM世代」を判定します。
+      <br><br>
+      古参だから必ず高得点、という診断ではありません。
+      <strong>その時代をどれだけ実際に体験していたか</strong>がポイントです。
+    </div>
 
-      <button class="answer" onclick="answer(7)">
-        B：かなり初期から
-      </button>
+    <button class="start-button" onclick="startDiagnosis()">
+      世代診断をスタート
+    </button>
 
-      <button class="answer" onclick="answer(4)">
-        C：途中から始めた
-      </button>
+  </section>
 
-      <button class="answer" onclick="answer(1)">
-        D：最近始めた
-      </button>
 
-    </section>
+  <!-- QUESTION -->
+  <section id="questionScreen" class="card hidden">
 
-  </main>
+    <div id="progress" class="progress"></div>
 
-  <script>
-    function answer(score) {
-      alert("回答を受け付けました！\n今回のスコア：" + score);
+    <div class="progress-bar">
+      <div id="progressInner" class="progress-inner"></div>
+    </div>
+
+    <div id="questionText" class="question"></div>
+
+    <div id="questionNote" class="note"></div>
+
+    <div id="answers"></div>
+
+  </section>
+
+
+  <!-- RESULT -->
+  <section id="resultScreen" class="card hidden">
+
+    <div class="result-label">
+      あなたのm HOLD'EM世代は……
+    </div>
+
+    <div id="resultTitle" class="result-title"></div>
+
+    <div id="resultDescription" class="result-description"></div>
+
+    <div id="resultScore" class="result-score"></div>
+
+    <button class="x-button" onclick="shareOnX()">
+      𝕏 結果をXにポストする
+    </button>
+
+    <div class="share-text">
+      結果を見た人も、このページから<br>
+      自分の世代を診断できます。
+    </div>
+
+    <button class="reset-button" onclick="restartDiagnosis()">
+      自分も世代診断する
+    </button>
+
+  </section>
+
+</div>
+
+<div class="version">
+  v20260814.0
+</div>
+
+
+<script>
+
+/* =========================================================
+   質問データ
+   ========================================================= */
+
+const questions = [
+
+  {
+    id: 1,
+    text: "ランクマッチが10MAXだった時代に参加したことがある？",
+    generation: [1],
+    answers: [
+      ["参加したことがある", 5],
+      ["知っているが参加していない", 3],
+      ["知らない", 0]
+    ]
+  },
+
+  {
+    id: 2,
+    text: "2022年8月より前、プロフェッショナル以上のランクマッチがmポイント制になる前のランクマッチに参加したことがある？",
+    generation: [1,2],
+    answers: [
+      ["参加したことがある", 4],
+      ["知っているが参加していない", 2],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 3,
+    text: "2022年11月まで、ランクマッチのランキングが「1か月単位」で集計されていたことを知っている？",
+    generation: [2],
+    answers: [
+      ["参加したことがある", 4],
+      ["知っているが参加していない", 2],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 4,
+    text: "2021年の「m HOLD'EMチャンピオンシップ」の予選STEP1・STEP2に参加したことがある？",
+    generation: [1],
+    answers: [
+      ["参加したことがある", 5],
+      ["知っているが参加していない", 3],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 5,
+    text: "ランクマッチが前半・後半の2期間に分かれていた時代を知っている？",
+    generation: [2],
+    answers: [
+      ["参加したことがある", 4],
+      ["知っているが参加していない", 2],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 6,
+    text: "2021年、m HOLD'EM公式がMirrativでキャンペーンをしていたことを当時から知っていた？",
+    generation: [1],
+    answers: [
+      ["キャンペーン中にMirrativで配信していた", 5],
+      ["当時から知っていた", 3],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 7,
+    text: "2021年当時、一般ユーザーからm HOLD'EM公式ユーザーになったプレイヤーがいたことを知っていた？",
+    generation: [1],
+    answers: [
+      ["当時から知っていた", 3],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 8,
+    text: "2024年のVTuberコラボ期間中に、m HOLD'EMをプレイしていた？",
+    note: "にじさんじ・ぶいすぽっ！・ホロライブ",
+    generation: [4],
+    answers: [
+      ["2024年当時プレイしていた", 2],
+      ["当時から知っていたがプレイしていない", 1],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 9,
+    text: "2021年または2022年に開催された「KAPT（キズナアイポーカートーナメント）」を、開催当時から知っていた？",
+    generation: [1,2],
+    answers: [
+      ["参加していた", 5],
+      ["参加していないが当時から知っていた", 1],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 10,
+    text: "「FINALSポイント」を、2021年当時から知っていた？",
+    generation: [1],
+    answers: [
+      ["当時から知っていた", 3],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 11,
+    text: "2023年に開催された「LEGEND A・K・Q・J CUP」を、開催当時から知っていた？",
+    note: "A・K・Q・Jの4つのLEGEND CUPに分かれていたイベント",
+    generation: [3],
+    answers: [
+      ["参加したことがある", 3],
+      ["参加していないが当時から知っていた", 1],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 12,
+    text: "みさわさんがランクマッチに参加していたことを知っている？",
+    generation: [4],
+    answers: [
+      ["2024年当時、みさわさんとランクマッチで同卓したことがある", 3],
+      ["2024年当時、みさわさんがランクマッチに参加していたことを知っていた", 2],
+      ["2024年当時から知っていたが、同卓したことはない", 1],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 13,
+    text: "2022年当時、ランクマッチとは別に「mポイントマッチ」があったことを知っている？",
+    note: "※現在のランクマッチとは別です",
+    generation: [2],
+    answers: [
+      ["参加したことがある", 4],
+      ["知っているが参加していない", 2],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 15,
+    text: "m HOLD'EM CUPが「プロフェッショナルランクのみ」参加でき、レジェンドランクは参加できなかった時代を、当時から知っている？",
+    generation: [1,2],
+    answers: [
+      ["参加したことがある", 5],
+      ["参加していないが当時から知っていた", 3],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 16,
+    text: "2022年8月までのLEGEND CUPが、「予選で勝ち点15pt以上を獲得して本戦に進む方式」だったことを、当時から知っていた？",
+    generation: [1,2],
+    answers: [
+      ["予選に参加したことがある", 4],
+      ["参加していないが当時から知っていた", 2],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 17,
+    text: "時間延長ボタンが、以前はトーナメントのみで1ゲーム（入室から退室）何回でも使用できたことを知っている？",
+    generation: [1],
+    answers: [
+      ["実際に使っていた", 5],
+      ["使っていないが当時から知っていた", 3],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 18,
+    text: "2022年当時、VIPパスでフォールド時の広告を非表示にできたことを知っていた？",
+    generation: [2],
+    answers: [
+      ["当時VIPパスを利用したことがある", 4],
+      ["利用していないが当時から知っていた", 2],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 19,
+    text: "m HOLD'EMのオリジナルキャラクターに、2022年7月1日に「槍原凪」「氷室穂高」が追加されたことを、当時から知っていた？",
+    generation: [2],
+    answers: [
+      ["当時から知っていた", 2],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 20,
+    text: "2021年9月と2022年3月に開催された「東京リベンジャーズ」コラボを、それぞれ開催当時から知っていた？",
+    generation: [1,2],
+    answers: [
+      ["両方知っている", 4],
+      ["どちらか一方", 1],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 21,
+    text: "2022年の海物語コラボで、ランクマッチの「5ハンド参加」を10日間達成して、サムをGETした？",
+    generation: [2],
+    answers: [
+      ["サムをGETした", 4],
+      ["ミッションを当時から知っていたがGETしていない", 2],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 22,
+    text: "「ALLアンティ」が2023年8月からランクマッチに追加されたことを、当時から知っていた？",
+    generation: [3],
+    answers: [
+      ["2023年当時プレイしていた", 3],
+      ["プレイしていないが当時から知っていた", 1],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 24,
+    text: "2025年2月、ランクマッチのプロフェッショナルステージが「m1・m2・m3」の3部リーグ制に変更されたことを、当時から知っていた？",
+    generation: [5],
+    answers: [
+      ["2025年当時プレイしていた", 1],
+      ["プレイしていないが当時から知っていた", 0],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 25,
+    text: "2024年9月にブラックジャックが初登場する前から、m HOLD'EMをプレイしていた？",
+    generation: [4],
+    answers: [
+      ["2024年9月より前からプレイしていた", 2],
+      ["登場前を知っていたがプレイしていない", 1],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: 26,
+    text: "2024年4月より前、m HOLD'EMではユーザー名を複数回変更できたことを当時から知っていた？",
+    generation: [4],
+    answers: [
+      ["実際に複数回変更した", 2],
+      ["変更していないが当時から知っていた", 1],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: "club",
+    text: "2023年4月に、従来のフレンドマッチが大幅リニューアルされ「m HOLD'EMクラブ」になったことを当時から知っていた？",
+    generation: [3],
+    answers: [
+      ["当時プレイしていた", 3],
+      ["プレイしていないが当時から知っていた", 1],
+      ["知らない・後から知った", 0]
+    ]
+  },
+
+  {
+    id: "roulette",
+    text: "m HOLD'EMにルーレットが追加されたことを、追加された当時から知っていた？",
+    generation: [5],
+    answers: [
+      ["ルーレットを実際にプレイしたことがある", 3],
+      ["プレイしていないが、追加された当時から知っていた", 1],
+      ["知らない・後から知った", 0]
+    ]
+  }
+
+];
+
+
+/* =========================================================
+   世代設定
+   ========================================================= */
+
+const generationConfig = {
+
+  1: {
+    name: "第1世代",
+    formalThreshold: 80,
+    important: [1,2,6,7,10,16],
+    required: 1
+  },
+
+  2: {
+    name: "第2世代",
+    formalThreshold: 70,
+    important: [3,5,13,15,18,19],
+    required: 3
+  },
+
+  3: {
+    name: "第3世代",
+    formalThreshold: 70,
+    important: [11,22,"club"],
+    required: "club"
+  },
+
+  4: {
+    name: "第4世代",
+    formalThreshold: 70,
+    important: [8,25,26],
+    required: 26
+  },
+
+  5: {
+    name: "第5世代",
+    formalThreshold: 70,
+    important: [24,"roulette"],
+    required: 24
+  }
+
+};
+
+
+/* =========================================================
+   結果文言
+   ========================================================= */
+
+const results = {
+
+  1: {
+    title: "第1世代",
+    description:
+      "m HOLD'EMの黎明期から、その時代の空気をリアルタイムで体験してきたあなた。初期仕様や当時のイベントまで知っている、まさに古参プレイヤーです。"
+  },
+
+  "pre1": {
+    title: "准第1世代",
+    description:
+      "かなり深く初期m HOLD'EMを知っているあなた。第1世代の記憶・体験は十分ですが、あと一歩で正式な第1世代です。"
+  },
+
+  2: {
+    title: "第2世代",
+    description:
+      "2022年前後のm HOLD'EMをリアルタイムで体験したあなた。ランクマッチや大会制度の変化も知る、まさに第2世代です。"
+  },
+
+  "pre2": {
+    title: "准第2世代",
+    description:
+      "2022年前後のm HOLD'EMをかなり知っているあなた。第2世代の時代をしっかり感じ取れるプレイヤーです。"
+  },
+
+  3: {
+    title: "第3世代",
+    description:
+      "2023年のm HOLD'EMをリアルタイムで体験したあなた。LEGEND CUPやALLアンティ、m HOLD'EMクラブなど、変化の時代を知っています。"
+  },
+
+  "pre3": {
+    title: "准第3世代",
+    description:
+      "2023年のm HOLD'EMをかなり知っているあなた。第3世代のプレイヤーとして十分な知識・体験があります。"
+  },
+
+  4: {
+    title: "第4世代",
+    description:
+      "2024年のm HOLD'EMをリアルタイムで体験したあなた。VTuberコラボやブラックジャックなど、この時代ならではの変化を知っています。"
+  },
+
+  "pre4": {
+    title: "准第4世代",
+    description:
+      "2024年のm HOLD'EMをかなり知っているあなた。第4世代の時代をしっかり体験しています。"
+  },
+
+  5: {
+    title: "第5世代",
+    description:
+      "2025年のm HOLD'EMをリアルタイムで体験したあなた。ランクマッチの新制度やルーレットなど、現在につながる時代を知っています。"
+  },
+
+  "pre5": {
+    title: "准第5世代",
+    description:
+      "2025年のm HOLD'EMをかなり知っているあなた。第5世代のプレイヤーとして十分な知識・体験があります。"
+  },
+
+  newcomer: {
+    title: "エムホ新人",
+    description:
+      "おめでとうございます！これから起こること全てが新鮮です！一緒にm HOLD'EMを始めましょう！"
+  }
+
+};
+
+
+/* =========================================================
+   状態
+   ========================================================= */
+
+let currentQuestion = 0;
+let scores = {};
+
+
+/* =========================================================
+   診断開始
+   ========================================================= */
+
+function startDiagnosis() {
+
+  currentQuestion = 0;
+  scores = {};
+
+  document.getElementById("startScreen").classList.add("hidden");
+  document.getElementById("resultScreen").classList.add("hidden");
+  document.getElementById("questionScreen").classList.remove("hidden");
+
+  showQuestion();
+
+}
+
+
+/* =========================================================
+   質問表示
+   ========================================================= */
+
+function showQuestion() {
+
+  const q = questions[currentQuestion];
+
+  document.getElementById("progress").textContent =
+    `Q${currentQuestion + 1} / ${questions.length}`;
+
+  document.getElementById("progressInner").style.width =
+    `${((currentQuestion) / questions.length) * 100}%`;
+
+  document.getElementById("questionText").textContent = q.text;
+
+  document.getElementById("questionNote").textContent =
+    q.note || "";
+
+  const answers = document.getElementById("answers");
+  answers.innerHTML = "";
+
+  q.answers.forEach((answer) => {
+
+    const button = document.createElement("button");
+
+    button.className = "answer";
+    button.textContent = answer[0];
+
+    button.onclick = function() {
+      selectAnswer(answer[1]);
+    };
+
+    answers.appendChild(button);
+
+  });
+
+}
+
+
+/* =========================================================
+   回答
+   ========================================================= */
+
+function selectAnswer(score) {
+
+  const q = questions[currentQuestion];
+
+  scores[q.id] = score;
+
+  currentQuestion++;
+
+  if (currentQuestion >= questions.length) {
+    showResult();
+  } else {
+    showQuestion();
+  }
+
+}
+
+
+/* =========================================================
+   世代スコア
+   ========================================================= */
+
+function getGenerationQuestions(generation) {
+
+  return questions.filter(q =>
+    q.generation.includes(generation)
+  );
+
+}
+
+
+function getGenerationScore(generation) {
+
+  const qs = getGenerationQuestions(generation);
+
+  let obtained = 0;
+  let maximum = 0;
+
+  qs.forEach(q => {
+
+    const selected = scores[q.id] || 0;
+
+    obtained += selected;
+
+    const maxScore = Math.max(
+      ...q.answers.map(a => a[1])
+    );
+
+    maximum += maxScore;
+
+  });
+
+  const raw = maximum === 0
+    ? 0
+    : (obtained / maximum) * 100;
+
+  // 指定どおり四捨五入
+  const rounded = Math.round(raw);
+
+  return {
+    obtained,
+    maximum,
+    percentage: rounded
+  };
+
+}
+
+
+/* =========================================================
+   重要質問正解率
+   ========================================================= */
+
+function getImportantRate(generation) {
+
+  const config = generationConfig[generation];
+
+  let correct = 0;
+
+  config.important.forEach(id => {
+
+    if ((scores[id] || 0) > 0) {
+      correct++;
     }
-  </script>
+
+  });
+
+  const rate =
+    (correct / config.important.length) * 100;
+
+  return {
+    correct,
+    total: config.important.length,
+    percentage: Math.round(rate)
+  };
+
+}
+
+
+/* =========================================================
+   必須質問
+   ========================================================= */
+
+function requiredCleared(generation) {
+
+  const required = generationConfig[generation].required;
+
+  return (scores[required] || 0) > 0;
+
+}
+
+
+/* =========================================================
+   正式条件
+   ========================================================= */
+
+function isFormal(generation) {
+
+  const config = generationConfig[generation];
+
+  const important = getImportantRate(generation);
+  const generationScore = getGenerationScore(generation);
+
+  return (
+    important.percentage >= 50 &&
+    generationScore.percentage >= config.formalThreshold &&
+    requiredCleared(generation)
+  );
+
+}
+
+
+/* =========================================================
+   准条件
+   ========================================================= */
+
+function isPreGeneration(generation) {
+
+  const important = getImportantRate(generation);
+  const generationScore = getGenerationScore(generation);
+
+  return (
+    important.correct >= 1 &&
+    generationScore.percentage >= 50 &&
+    requiredCleared(generation)
+  );
+
+}
+
+
+/* =========================================================
+   結果判定
+   ========================================================= */
+
+function determineResult() {
+
+  for (let generation = 1; generation <= 5; generation++) {
+
+    if (isFormal(generation)) {
+      return generation;
+    }
+
+    if (isPreGeneration(generation)) {
+      return `pre${generation}`;
+    }
+
+  }
+
+  return "newcomer";
+
+}
+
+
+/* =========================================================
+   結果表示
+   ========================================================= */
+
+function showResult() {
+
+  document.getElementById("questionScreen")
+    .classList.add("hidden");
+
+  document.getElementById("resultScreen")
+    .classList.remove("hidden");
+
+  const resultKey = determineResult();
+  const result = results[resultKey];
+
+  document.getElementById("resultTitle").textContent =
+    result.title;
+
+  document.getElementById("resultDescription").textContent =
+    result.description;
+
+  createScoreSummary();
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* =========================================================
+   スコア表示
+   ========================================================= */
+
+function createScoreSummary() {
+
+  const container =
+    document.getElementById("resultScore");
+
+  container.innerHTML = "";
+
+  for (let generation = 1; generation <= 5; generation++) {
+
+    const score =
+      getGenerationScore(generation);
+
+    const important =
+      getImportantRate(generation);
+
+    const row =
+      document.createElement("div");
+
+    row.className = "score-row";
+
+    row.innerHTML =
+      `<span>第${generation}世代</span>
+       <strong>${score.percentage}%</strong>`;
+
+    container.appendChild(row);
+
+  }
+
+}
+
+
+/* =========================================================
+   X投稿
+   ========================================================= */
+
+function shareOnX() {
+
+  const resultKey = determineResult();
+  const result = results[resultKey];
+
+  const pageUrl =
+    window.location.href.split("#")[0];
+
+  const text =
+    `m HOLD'EM世代診断の結果は「${result.title}」でした！\n\n` +
+    `あなたは何世代？👇`;
+
+  const xUrl =
+    "https://twitter.com/intent/tweet" +
+    "?text=" + encodeURIComponent(text) +
+    "&url=" + encodeURIComponent(pageUrl);
+
+  window.open(
+    xUrl,
+    "_blank",
+    "noopener,noreferrer"
+  );
+
+}
+
+
+/* =========================================================
+   再診断
+   ========================================================= */
+
+function restartDiagnosis() {
+
+  currentQuestion = 0;
+  scores = {};
+
+  document.getElementById("resultScreen")
+    .classList.add("hidden");
+
+  document.getElementById("questionScreen")
+    .classList.remove("hidden");
+
+  showQuestion();
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+</script>
 
 </body>
 </html>
