@@ -294,7 +294,7 @@ body{min-height:100vh}
 
 </div>
 
-<div class="version">v20260815.0</div>
+<div class="version">v20260815.1</div>
 
 
 <script>
@@ -986,29 +986,27 @@ function shareX(){
         : "第" + key + "世代";
 
   const comments = {
-    "1":"10MAXを知る超古参🔥",
-    "pre1":"初期から知る古参👀",
-    "2":"mポイントマッチを知る強者🔥",
-    "pre2":"2022年を知る古参👀",
-    "3":"ALLアンティを知る濃い世代🔥",
-    "pre3":"2023年を知る世代👀",
-    "4":"VTuberコラボを体験した世代🔥",
-    "pre4":"2024年を知る世代👀",
-    "5":"m1・m2・m3を知る現役世代🔥",
-    "pre5":"最近を追う新世代✨",
-    "newcomer":"ここから始まるm HOLD'EM史✨"
+    "1":"ランクマッチ10MAXの時代を知っている、さすがに古参すぎる…🔥",
+    "pre1":"初期m HOLD'EMをリアルタイムで知る、かなりの古参です👀",
+    "2":"mポイントマッチを知っている、かなりの強者です🔥",
+    "pre2":"2022年のm HOLD'EMを知る、かなりの古参です👀",
+    "3":"ALLアンティやm HOLD'EMクラブをリアルタイムで知る世代です🔥",
+    "pre3":"2023年のm HOLD'EMをしっかり知る世代です👀",
+    "4":"VTuberコラボやBJ登場をリアルタイムで体験した世代です🔥",
+    "pre4":"2024年の大きな変化をしっかり知る世代です👀",
+    "5":"m1・m2・m3リーグ制をリアルタイムで知る現役世代です🔥",
+    "pre5":"最近のm HOLD'EMをしっかり追っている新世代です✨",
+    "newcomer":"ここからあなたのm HOLD'EM史が始まります✨"
   };
-
-  const comment = comments[key];
 
   const url="https://mholdem-generation-diagnosis.vercel.app/";
 
   const text=
-`🎉 m HOLD'EM世代診断！
-【${generationLabel}】でした！
-${comment}
+`🎉 m HOLD'EM世代診断やってみました！
+結果は【${generationLabel}】でした！
+${comments[key]}
 
-何世代？診断してみて👇
+あなたは何世代？ぜひ診断してみて👇
 ${url}
 #エムホールデム #エムホ世代診断`;
 
