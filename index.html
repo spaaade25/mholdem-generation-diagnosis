@@ -217,6 +217,7 @@ body{min-height:100vh}
   }
 }
 </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -293,10 +294,35 @@ body{min-height:100vh}
 
 </div>
 
-<div class="version">v20260814.0</div>
+<div class="version">v20260815.0</div>
 
 
 <script>
+
+/* =========================
+   Supabase
+========================= */
+const SUPABASE_URL = "https://xrbqcquarfsxetvwpsbx.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_CtLvaw7BS_bondAMKnj7nA_iBft2Ml0";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+async function saveDiagnosisResult(generation){
+  try{
+    const { error } = await supabaseClient
+      .from("diagnosis_results")
+      .insert({ generation });
+
+    if(error){
+      console.error("診断結果の保存に失敗:", error);
+    }
+  }catch(e){
+    console.error("Supabase接続エラー:", e);
+  }
+}
 
 const questions = [
 
@@ -919,6 +945,16 @@ function finish(){
 
   const key=getResult();
   const r=resultText[key];
+
+  // 診断結果をSupabaseへ保存
+  const generation =
+    key === "newcomer"
+      ? "newcomer"
+      : key.startsWith("pre")
+        ? "第" + key.replace("pre", "") + "世代（准）"
+        : "第" + key + "世代";
+
+  saveDiagnosisResult(generation);
 
   document.getElementById("quiz").classList.add("hidden");
 
